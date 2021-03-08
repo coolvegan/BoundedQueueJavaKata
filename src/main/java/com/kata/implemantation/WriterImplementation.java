@@ -21,12 +21,14 @@ public class WriterImplementation implements ProcessInterface {
     }
 
     @Override
-    public void run() {
+    public void run() throws InterruptedException {
         System.out.println(this.getClass().getName().toString()+">>WriteIteration");
         if (boundedQueue.Count() < boundedQueue.Size()){
             int random = randomNumberInterface.get();
             System.out.println(this.getClass().getName().toString()+">>Adding>>"+random);
             boundedQueue.Enqueue(random);
+        } else{
+            Thread.sleep(randomNumberInterface.get());
         }
     }
 }

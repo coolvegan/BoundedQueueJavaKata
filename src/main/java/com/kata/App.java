@@ -14,10 +14,10 @@ public class App
         ProcessInterface processInterface = new WriterImplementation(boundedQueue);
         ((WriterImplementation)(processInterface)).setNumberStrategy(randomNumberInterface);
 
-        RandomNumberInterface randomNumberInterface1 = new RandomNumberImpl();
+        RandomNumberInterface zeroDelay = new NullDelayImplementation();
 
-        WorkerThread readthread = new WorkerThread(randomNumberInterface1,new ReadImplementation(boundedQueue));
-        WorkerThread writethread = new WorkerThread(new RandomNumberImpl(),processInterface);
+        WorkerThread readthread = new WorkerThread(zeroDelay,new ReadImplementation(boundedQueue));
+        WorkerThread writethread = new WorkerThread(zeroDelay,processInterface);
         WorkerThread watchThread = new WorkerThread(() -> {return 1000;}, new WatchImplementation(boundedQueue));
 
         ThreadPool threadPool = new ThreadPool();
